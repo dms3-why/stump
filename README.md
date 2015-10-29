@@ -38,3 +38,15 @@ func main() {
 	}
 }
 ```
+
+## Tips
+While generally frowned upon, I like importing stump into my packages namespace like so:
+```
+import . "github.com/whyrusleeping/stump"
+```
+
+This allows you to call all the logging functions without the package prefix.
+(eg. just `Log("hello")` instead of `stump.Log("hello")`)
+
+## License
+MIT
