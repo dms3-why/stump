@@ -12,6 +12,11 @@ the prefix is configurable by setting `stump.ErrorPrefix`.
 
 `Fatal` is an error log that also calls `os.Exit` right afterwards.
 
+## Installation
+```
+$ go get -u github.com/whyrusleeping/stump
+```
+
 ## Usage
 
 ```go
