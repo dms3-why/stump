@@ -2,6 +2,7 @@ package stump
 
 import (
 	"fmt"
+	"io"
 	"os"
 	"strings"
 )
@@ -10,8 +11,11 @@ var Verbose bool
 
 var ErrorPrefix = "ERROR: "
 
+var LogOut io.Writer = os.Stdout
+var ErrOut io.Writer = os.Stdout
+
 func Error(args ...interface{}) {
-	log(ErrorPrefix, args)
+	log(ErrOut, ErrorPrefix, args)
 }
 
 func Fatal(args ...interface{}) {
@@ -20,16 +24,16 @@ func Fatal(args ...interface{}) {
 }
 
 func Log(args ...interface{}) {
-	log("", args)
+	log(LogOut, "", args)
 }
 
 func VLog(args ...interface{}) {
 	if Verbose {
-		log("", args)
+		log(LogOut, "", args)
 	}
 }
 
-func log(prefix string, args []interface{}) {
+func log(out io.Writer, prefix string, args []interface{}) {
 	prefix = strings.TrimRight(prefix, "\t \n")
 	writelog := func(format string, args ...interface{}) {
 		n := strings.Count(format, "%")
@@ -39,7 +43,7 @@ func log(prefix string, args []interface{}) {
 		if format[len(format)-1] != '\n' {
 			format += "\n"
 		}
-		fmt.Printf(format, args...)
+		fmt.Fprintf(out, format, args...)
 	}
 
 	if len(args) == 0 {
