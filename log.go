@@ -34,7 +34,6 @@ func VLog(args ...interface{}) {
 }
 
 func log(out io.Writer, prefix string, args []interface{}) {
-	prefix = strings.TrimRight(prefix, "\t \n")
 	writelog := func(format string, args ...interface{}) {
 		n := strings.Count(format, "%")
 		if n < len(args) {
