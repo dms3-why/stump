@@ -39,7 +39,7 @@ func log(out io.Writer, prefix string, args []interface{}) {
 		if n < len(args) {
 			format += strings.Repeat(" %s", len(args)-n)
 		}
-		if format[len(format)-1] != '\n' {
+		if !strings.HasSuffix(format, "\n") {
 			format += "\n"
 		}
 		fmt.Fprintf(out, format, args...)
